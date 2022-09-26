@@ -6,6 +6,14 @@ then
   exit 1
 fi
 
+type jq > /dev/null 2>&1
+ret=$?
+if [[ $ret != 0 ]]
+then
+  echo "jq not found, please install it and try again"
+  exit 1
+fi
+
 getjenkinsdeps() {
   local jsonindex=$1
   local plugin=$2
