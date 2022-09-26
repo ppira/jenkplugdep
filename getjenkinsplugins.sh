@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [[ $# != 1 ]]
+then
+  echo "Usage: $0 <plugin>"
+  exit 1
+fi
+
 getjenkinsdeps() {
   local jsonindex=$1
   local plugin=$2
@@ -32,9 +38,6 @@ done
 
 # sort and uniq the results
 plugins=$(for word in ${plugins}; do echo "$word "; done | sort |uniq)
-echo $plugins
-
-exit 0
 
 # get all plugins
 for plugin in ${plugins}
@@ -45,4 +48,4 @@ do
 done
 
 # remove temp files
-
+rm -f "${toc}"
